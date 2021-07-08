@@ -26,7 +26,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker Image for basic-python-webserver
-        run: docker build ./basic-python-webserver --tag examples/basic-python-webserver:1.0.0
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/basic-python-webserver
+          VERSION=latest
+          docker build ./basic-python-webserver --tag $IMAGE_ID:$VERSION
         
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
@@ -35,6 +38,4 @@ jobs:
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/basic-python-webserver   
           VERSION=latest
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
           docker push $IMAGE_ID:$VERSION
