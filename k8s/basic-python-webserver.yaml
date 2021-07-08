@@ -1,0 +1,22 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-python-webserver
+  labels:
+    app: basic-python-webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basic-python-webserver
+  template:
+    metadata:
+      labels:
+        app: basic-python-webserver
+    spec:
+      containers:
+        - name: basic-python-webserver
+          image: basic-python-webserver:latest
+          ports:
+            - containerPort: 5000

@@ -1,0 +1,22 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-react-app
+  labels:
+    app: basic-react-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basic-react-app
+  template:
+    metadata:
+      labels:
+        app: basic-react-app
+    spec:
+      containers:
+        - name: basic-react-app
+          image: basic-react-app:latest 
+          ports:
+            - containerPort: 3000
