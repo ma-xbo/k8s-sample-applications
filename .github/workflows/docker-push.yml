@@ -1,10 +1,10 @@
-name: Create and publish a Docker image to GitHub Packages
+name: Create and publish Docker images
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,11 +18,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v2
-      
 
       # Build Docker Images
       - name: Build Docker Image for basic-python-webserver
@@ -32,34 +30,32 @@ jobs:
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$APP_NAME
           VERSION=latest
           docker build ./$APP_NAME --tag $IMAGE_ID:$VERSION
-          
-      - name: Build Docker Image for basic-react-app
-        env:
-          APP_NAME: basic-react-app
-        run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$APP_NAME
-          VERSION=latest
-          docker build ./$APP_NAME --tag $IMAGE_ID:$VERSION
-      
 
-      # Log into GitHub Container Registry 
+      #      - name: Build Docker Image for basic-react-app
+      #        env:
+      #          APP_NAME: basic-react-app
+      #        run: |
+      #          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$APP_NAME
+      #          VERSION=latest
+      #          docker build ./$APP_NAME --tag $IMAGE_ID:$VERSION
+
+      # Log into GitHub Container Registry
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
 
-
       # Push Images to GitHub Container Registry (ghcr)
-      - name: Push image
+      - name: Push image basic-python-webserver
         env:
           APP_NAME: basic-python-webserver
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$APP_NAME
           VERSION=latest
           docker push $IMAGE_ID:$VERSION
-          
-      - name: Push image
-        env:
-          APP_NAME: basic-python-webserver
-        run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$APP_NAME 
-          VERSION=latest
-          docker push $IMAGE_ID:$VERSION
+
+#      - name: Push image basic-python-webserver
+#        env:
+#          APP_NAME: basic-python-webserver
+#        run: |
+#          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$APP_NAME
+#          VERSION=latest
+#          docker push $IMAGE_ID:$VERSION
