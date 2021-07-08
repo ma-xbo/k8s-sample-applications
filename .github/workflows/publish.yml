@@ -6,9 +6,9 @@ on:
   push:
     branches: [ main ]
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+#env:
+#  REGISTRY: ghcr.io
+#  IMAGE_NAME: ${{ github.repository }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -16,9 +16,9 @@ jobs:
   build-and-push-image:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+#    permissions:
+#      contents: read
+#      packages: write
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,12 +31,10 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.PushPackage }}
-          #password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: ./basic-python-webserver/
           push: true
-          tags: user/app:latest
