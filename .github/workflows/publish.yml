@@ -36,7 +36,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.6.1     
         with:
-          context: ./basic-python-webserver
+          context: ./basic-python-webserver/
           push: true
           tags: "latest"
-          labels: "label-test"
