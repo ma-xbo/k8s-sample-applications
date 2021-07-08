@@ -16,9 +16,6 @@ jobs:
   build-and-push-image:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./basic-python-webserver
     permissions:
       contents: read
       packages: write
@@ -39,7 +36,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.6.1     
         with:
-#          context: ./basic-python-webserver
-#          file: ./Dockerfile
+          context: ./basic-python-webserver/
           push: true
           tags: user/app:latest
