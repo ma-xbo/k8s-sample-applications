@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: basic-python-webserver
-          image: basic-python-webserver:latest
+          image: ghcr.io/ma-xbo/basic-python-webserver:latest
           ports:
             - containerPort: 5000
