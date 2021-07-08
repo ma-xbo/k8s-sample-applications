@@ -26,15 +26,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v1.10.0
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2.6.1     
+        uses: docker/build-push-action@v2
         with:
           context: ./basic-python-webserver/
           push: true
