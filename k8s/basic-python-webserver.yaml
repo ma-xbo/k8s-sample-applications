@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: basic-python-webserver
+  name: basic-python-webserver-deployment
   labels:
     app: basic-python-webserver
 spec:
@@ -20,3 +20,19 @@ spec:
           image: ghcr.io/ma-xbo/basic-python-webserver:latest
           ports:
             - containerPort: 5000
+
+---
+
+# Service
+kind: Service
+apiVersion: v1
+metadata:
+  name: basic-python-webserver-service
+spec:
+  selector:
+    app: basic-python-webserver
+  ports:
+    - name: basic-python-webserver
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
