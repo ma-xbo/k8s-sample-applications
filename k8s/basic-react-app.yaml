@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: basic-react-app
-          image: basic-react-app:latest 
+          image: ghcr.io/ma-xbo/basic-react-app:latest
           ports:
             - containerPort: 3000
