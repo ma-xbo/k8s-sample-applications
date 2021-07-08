@@ -1,4 +1,4 @@
-name: Create and publish Docker image
+name: Docker image - basic-react-app
 
 # Controls when the workflow will run
 on:
