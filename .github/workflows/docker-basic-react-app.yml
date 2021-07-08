@@ -5,7 +5,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [main]
-  paths:
+    paths:
       - basic-react-app/**
  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -26,7 +26,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Build Docker Image for basic-react-app
+      - name: Build Docker Image
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$APP_NAME
           VERSION=latest
